@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Genre;
+use App\Models\Book;
 
 class User extends Authenticatable
 {
@@ -62,5 +63,9 @@ class User extends Authenticatable
 
     public function genres() {
         return $this->hasMany(Genre::class);
+    }
+
+    public function books() {
+        return $this->hasMany(Book::class);
     }
 }

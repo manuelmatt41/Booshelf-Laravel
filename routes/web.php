@@ -37,3 +37,13 @@ Route::middleware([
     })->name('genres');
 });
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/books', function () {
+        return view('books');
+    })->name('books');
+});
+
