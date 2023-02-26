@@ -5,7 +5,7 @@
             <div>Books</div>
             <div class="mr-2">
                 <x-button wire:click="confirmBookAdd" class="bg-green-500 hover:bg-green-800">
-                    {{__('Add')}}
+                    {{ __('Add') }}
                 </x-button>
             </div>
         </div>
@@ -27,41 +27,41 @@
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('genre_id')">Genres</button>
+                                <button wire:click="sortBy('genre_id')">{{ __('Genres') }}</button>
                                 <x-sort-icon sortField="genre_id" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('title')">Title</button>
+                                <button wire:click="sortBy('title')">{{ __('Title') }}</button>
                                 <x-sort-icon sortField="title" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('author')">Author</button>
+                                <button wire:click="sortBy('author')">{{ __('Author') }}</button>
                                 <x-sort-icon sortField="author" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('synopsis')">Synopsis</button>
+                                <button wire:click="sortBy('synopsis')">{{ __('Synopsis') }}</button>
                                 <x-sort-icon sortField="synopsis" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('pages')">Pages</button>
+                                <button wire:click="sortBy('pages')">{{ __('Pages') }}</button>
                                 <x-sort-icon sortField="pages" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button>Finished</button>
+                                <button>{{ __('Finished') }}</button>
                             </div>
                         </th>
                         <th class="px-4 py-2">
-                            <div class="flex items-center">Action</div>
+                            <div class="flex items-center">{{ __('Action') }}</div>
                         </th>
                     </tr>
                 </thead>
@@ -75,7 +75,8 @@
                             <td class="rounded border px-4 py-2">
                                 {{ \Illuminate\Support\Str::limit($book->synopsis, 10) }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->pages }}</td>
-                            <td class="rounded border px-4 py-2"> {{ $book->finished ? 'Finished' : 'Unfinished' }}</td>
+                            <td class="rounded border px-4 py-2"> {{ $book->finished ? 'Finished' : 'Unfinished' }}
+                            </td>
                             <td class="rounded border px-4 py-2">
                                 <x-button wire:click="confirmBookEdit ({{ $book->id }})"
                                     class="bg-blue-500 hover:bg-blue-800">
@@ -100,7 +101,7 @@
             </x-slot>
 
             <x-slot name="content">
-                Are you sure you want to delete this book?.
+                {{ __('Are you sure you want to delete this book?.') }}
             </x-slot>
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingBookDeletion', false)" wire:loading.attr="disabled">
@@ -124,7 +125,7 @@
                     <x-input id="book.isbn" type="text" class="mt-1 block w-full" wire:model.defer="book.isbn" />
                     <x-input-error for="book.isbn" class="mt-2" />
                     @if (session('error'))
-                        <div class="alert alert-danger text-red-500">ISBN already exist</div>
+                        <div class="alert alert-danger text-red-500">{{ __('ISBN already exist') }}</div>
                     @endif
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">

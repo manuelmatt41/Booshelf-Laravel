@@ -2,10 +2,10 @@
 
     <h1 class="mt-4 text-2xl font-medium text-gray-900">
         <div class="mt-4 text-2xl flex justify-between shadow-inner">
-            <div>Genres</div>
+            <div>{{ __('Genres') }}</div>
             <div class="mr-2">
                 <x-button wire:click="confirmGenreAdd" class="bg-green-500 hover:bg-green-800">
-                    Add
+                    {{ __('Add') }}
                 </x-button>
             </div>
         </div>
@@ -27,12 +27,12 @@
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('name')">Name</button>
+                                <button wire:click="sortBy('name')">{{ __('Name') }}</button>
                                 <x-sort-icon sortField="name" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
                         <th class="px-4 py-2">
-                            <div class="flex items-center">Action</div>
+                            <div class="flex items-center">{{ __('Action') }}</div>
                         </th>
                     </tr>
                 </thead>
@@ -42,7 +42,8 @@
                             <td class="rounded border px-4 py-2"> {{ $genre->id }}</td>
                             <td class="rounded border px-4 py-2"> {{ $genre->name }}</td>
                             <td class="rounded border px-4 py-2">
-                                <x-button wire:click="confirmGenreEdit ({{ $genre->id }})" class="bg-blue-500 hover:bg-blue-800">
+                                <x-button wire:click="confirmGenreEdit ({{ $genre->id }})"
+                                    class="bg-blue-500 hover:bg-blue-800">
                                     Edit
                                 </x-button>
                                 <x-danger-button wire:click="confirmGenreDeletion ( {{ $genre->id }})"
@@ -64,7 +65,7 @@
             </x-slot>
 
             <x-slot name="content">
-                Are you sure you want to delete this genre?.
+                {{ __('Are you sure you want to delete this genre?.') }}
             </x-slot>
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingGenreDeletion', false)" wire:loading.attr="disabled">
