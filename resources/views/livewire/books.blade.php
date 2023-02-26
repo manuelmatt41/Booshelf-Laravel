@@ -5,7 +5,7 @@
             <div>Books</div>
             <div class="mr-2">
                 <x-button wire:click="confirmBookAdd" class="bg-green-500 hover:bg-green-800">
-                    Add
+                    {{__('Add')}}
                 </x-button>
             </div>
         </div>
