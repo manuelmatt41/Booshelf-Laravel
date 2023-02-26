@@ -27,7 +27,7 @@
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('genre_id')">GenreSS</button>
+                                <button wire:click="sortBy('genre_id')">Genres</button>
                                 <x-sort-icon sortField="genre_id" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
@@ -72,7 +72,8 @@
                             <td class="rounded border px-4 py-2"> {{ $genres->find($book->genre_id)->name }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->title }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->author }}</td>
-                            <td class="rounded border px-4 py-2"> {{ \Illuminate\Support\Str::limit($book->synopsis, 10) }}</td>
+                            <td class="rounded border px-4 py-2">
+                                {{ \Illuminate\Support\Str::limit($book->synopsis, 10) }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->pages }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->finished ? 'Finished' : 'Unfinished' }}</td>
                             <td class="rounded border px-4 py-2">
@@ -122,6 +123,9 @@
                     <x-label for="name" value="{{ __('Isbn') }}" />
                     <x-input id="book.isbn" type="text" class="mt-1 block w-full" wire:model.defer="book.isbn" />
                     <x-input-error for="book.isbn" class="mt-2" />
+                    @if (session('error'))
+                        <div class="alert alert-danger text-red-500">ISBN already exist</div>
+                    @endif
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Genre id') }}" />
@@ -140,7 +144,8 @@
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Author') }}" />
-                    <x-input id="book.author" type="text" class="mt-1 block w-full" wire:model.defer="book.author" />
+                    <x-input id="book.author" type="text" class="mt-1 block w-full"
+                        wire:model.defer="book.author" />
                     <x-input-error for="book.author" class="mt-2" />
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">

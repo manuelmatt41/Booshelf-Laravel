@@ -28,7 +28,7 @@ class Books extends Component
     ];
 
     protected $rules = [
-        'book.isbn' => 'required|int|min:13',
+        'book.isbn' => 'required|int|min:1000000000000|max:9999999999999',
         'book.genre_id' => 'required|int|min:1',
         'book.title' => 'required|string|min:1',
         'book.author' => 'required|string|min:1',
@@ -91,18 +91,22 @@ class Books extends Component
     public function addBook()
     {
         $this->validate();
-        if (isset($this->book->isbn)) {
+        if (isset($this->book->id)) {
             $this->book->save();
         } else {
-            auth()->user()->books()->create([
-                'isbn' => $this->book['isbn'],
-                'title' => $this->book['title'],
-                'author' => $this->book['author'],
-                'synopsis' => $this->book['synopsis'],
-                'genre_id' => $this->book['genre_id'],
-                'pages' => $this->book['pages'],
-                'finished' => $this->book['finished']
-            ]);
+            try {
+                auth()->user()->books()->create([
+                    'isbn' => $this->book['isbn'],
+                    'title' => $this->book['title'],
+                    'author' => $this->book['author'],
+                    'synopsis' => $this->book['synopsis'],
+                    'genre_id' => $this->book['genre_id'],
+                    'pages' => $this->book['pages'],
+                    'finished' => $this->book['finished']
+                ]);
+            } catch (\Throwable $th) {
+                return back()->withError($th->getMessage())->withInput();
+            }
         }
         $this->confirmingBookAdd = false;
     }
