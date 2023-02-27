@@ -2,7 +2,7 @@
 
     <h1 class="mt-4 text-2xl font-medium text-gray-900">
         <div class="mt-4 text-2xl flex justify-between shadow-inner">
-            <div>Books</div>
+            <div>{{ __('Books') }}</div>
             <div class="mr-2">
                 <x-button wire:click="confirmBookAdd" class="bg-green-500 hover:bg-green-800">
                     {{ __('Add') }}
@@ -27,7 +27,7 @@
                         </th>
                         <th class="px-4 py-2">
                             <div class="flex items-center">
-                                <button wire:click="sortBy('genre_id')">{{ __('Genres') }}</button>
+                                <button wire:click="sortBy('genre_id')">{{ __('Genre') }}</button>
                                 <x-sort-icon sortField="genre_id" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
@@ -71,7 +71,7 @@
                             <td class="rounded border px-4 py-2"> {{ $book->isbn }}</td>
                             <td class="rounded border px-4 py-2"> {{ $genres->find($book->genre_id)->name }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->title }}</td>
-                            <td class="rounded border px-4 py-2"> {{ $book->author }}</td>
+                            <td class="rounded border px-4 py-2"> {{  $authors->find($book->author_id)->name }}</td>
                             <td class="rounded border px-4 py-2">
                                 {{ \Illuminate\Support\Str::limit($book->synopsis, 10) }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->pages }}</td>
@@ -80,7 +80,7 @@
                             <td class="rounded border px-4 py-2">
                                 <x-button wire:click="confirmBookEdit ({{ $book->id }})"
                                     class="bg-blue-500 hover:bg-blue-800">
-                                    Edit
+                                    {{ __('Edit') }}
                                 </x-button>
                                 <x-danger-button wire:click="confirmBookDeletion ( {{ $book->id }})"
                                     wire:loading.attr="disabled">
@@ -116,7 +116,7 @@
         </x-dialog-modal>
         <x-dialog-modal wire:model="confirmingBookAdd">
             <x-slot name="title">
-                {{ isset($this->book->isbn) ? 'Edit book' : 'Add book' }}
+                {{ isset($this->book->isbn) ? __('Edit book') : __('Add book') }}
             </x-slot>
 
             <x-slot name="content">
@@ -131,7 +131,7 @@
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Genre id') }}" />
                     <select name="Genre id" wire:model.defer="book.genre_id">
-                        <option value="">--SELECT GENRE--</option>
+                        <option value="">{{__('--SELECT GENRE--')}}</option>
                         @foreach ($genres as $genre)
                             <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                         @endforeach
@@ -145,9 +145,13 @@
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Author') }}" />
-                    <x-input id="book.author" type="text" class="mt-1 block w-full"
-                        wire:model.defer="book.author" />
-                    <x-input-error for="book.author" class="mt-2" />
+                    <select name="Author id" wire:model.defer="book.author_id">
+                        <option value="">{{__('--SELECT AUTHOR--')}}</option>
+                        @foreach ($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->name }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="book.author_id" class="mt-2" />
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Synopsis') }}" />
@@ -163,7 +167,7 @@
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <input type="checkbox" wire:model.defer="book.finished" name="" />
-                    <span class="ml-2 text-sm text-gray-600">Finished</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Finished') }}</span>
                 </div>
             </x-slot>
             <x-slot name="footer">

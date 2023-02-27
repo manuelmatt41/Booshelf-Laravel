@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Book extends Model
+class Author extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['isbn', 'title', 'author_id', 'synopsis', 'genre_id', 'pages', 'finished'];
+    protected $fillable = ['name'];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

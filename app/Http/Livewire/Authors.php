@@ -4,21 +4,21 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Genre;
+use App\Models\Author;
 
-class Genres extends Component
+class Authors extends Component
 {
     use WithPagination;
-
+    
     public $q;
 
     public $sortBy = 'id';
     public $sortAsc = true;
 
-    public $genre;
+    public $author;
 
-    public $confirmingGenreDeletion = false;
-    public $confirmingGenreAdd = false;
+    public $confirmingAuthorDeletion = false;
+    public $confirmingAuthorAdd = false;
 
     protected $queryString = [
         'q' => ['except' => ''],
@@ -27,12 +27,12 @@ class Genres extends Component
     ];
 
     protected $rules = [
-        'genre.name' => 'required|string|min:1'
+        'author.name' => 'required|string|min:1'
     ];
 
     public function render()
     {
-        $genres = Genre::where('user_id', auth()->user()->id)
+        $authors = Author::where('user_id', auth()->user()->id)
             ->when($this->q, function ($query) {
                 return $query->where(function ($query) {
                     $query->where('name', 'like', '%' . $this->q . '%');
@@ -40,12 +40,12 @@ class Genres extends Component
             })
             ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
         // $query = $genres->toSql();
-        $genres = $genres->paginate(10);
-
-        return view('livewire.genres', [
-            'genres' => $genres
+        $authors = $authors->paginate(10);
+        return view('livewire.authors', [
+            'authors' => $authors
         ]);
     }
+
 
     public function updatingQ()
     {
@@ -60,40 +60,41 @@ class Genres extends Component
         $this->sortBy = $field;
     }
 
-    public function confirmGenreDeletion($id)
+    public function confirmAuthorDeletion($id)
     {
-        $this->confirmingGenreDeletion = $id;
+        $this->confirmingAuthorDeletion = $id;
     }
 
-    public function deleteGenre(Genre $genre)
+    public function deleteAuthor(Author $author)
     {
-        $genre->delete();
-        $this->confirmingGenreDeletion = false;
+        $author->delete();
+        $this->confirmingAuthorDeletion = false;
     }
 
-    public function confirmGenreAdd()
+    public function confirmAuthorAdd()
     {
-        $this->reset(['genre']);
-        $this->confirmingGenreAdd = true;
+        $this->reset(['author']);
+        $this->confirmingAuthorAdd = true;
     }
 
 
-    public function addGenre()
+    public function addAuthor()
     {
         $this->validate();
-        if (isset($this->genre->id)) {
-            $this->genre->save();            
+        if (isset($this->author->id)) {
+            $this->author->save();            
         } else {
-            auth()->user()->genres()->create([
-                'name' => $this->genre['name']
+            auth()->user()->authors()->create([
+                'name' => $this->author['name']
             ]);
         }
-        $this->confirmingGenreAdd = false;
+        $this->confirmingAuthorAdd = false;
     }
 
-    public function confirmGenreEdit(Genre $genre)
+    public function confirmAuthorEdit(Author $author)
     {
-        $this->genre = $genre;
-        $this->confirmingGenreAdd = true;
+        $this->author = $author;
+        $this->confirmingAuthorAdd = true;
     }
 }
+

@@ -2,9 +2,9 @@
 
     <h1 class="mt-4 text-2xl font-medium text-gray-900">
         <div class="mt-4 text-2xl flex justify-between shadow-inner">
-            <div>{{ __('Genres') }}</div>
+            <div>{{ __('Authors') }}</div>
             <div class="mr-2">
-                <x-button wire:click="confirmGenreAdd" class="bg-green-500 hover:bg-green-800">
+                <x-button wire:click="confirmAuthorAdd" class="bg-green-500 hover:bg-green-800">
                     {{ __('Add') }}
                 </x-button>
             </div>
@@ -37,16 +37,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($genres as $genre)
+                    @foreach ($authors as $author)
                         <tr>
-                            <td class="rounded border px-4 py-2"> {{ $genre->id }}</td>
-                            <td class="rounded border px-4 py-2"> {{ $genre->name }}</td>
+                            <td class="rounded border px-4 py-2"> {{ $author->id }}</td>
+                            <td class="rounded border px-4 py-2"> {{ $author->name }}</td>
                             <td class="rounded border px-4 py-2">
-                                <x-button wire:click="confirmGenreEdit ({{ $genre->id }})"
+                                <x-button wire:click="confirmAuthorEdit ({{ $author->id }})"
                                     class="bg-blue-500 hover:bg-blue-800">
                                     {{ __('Edit') }}
                                 </x-button>
-                                <x-danger-button wire:click="confirmGenreDeletion ( {{ $genre->id }})"
+                                <x-danger-button wire:click="confirmAuthorDeletion ( {{ $author->id }})"
                                     wire:loading.attr="disabled">
                                     {{ __('Remove') }}
                                 </x-danger-button>
@@ -57,45 +57,45 @@
             </table>
         </div>
         <div class="mt-4">
-            {{ $genres }}
+            {{ $authors }}
         </div>
-        <x-dialog-modal wire:model="confirmingGenreDeletion">
+        <x-dialog-modal wire:model="confirmingAuthorDeletion">
             <x-slot name="title">
                 {{ __('Remove') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure you want to delete this genre?.') }}
+                {{ __('Are you sure you want to delete this author?.') }}
             </x-slot>
             <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingGenreDeletion', false)" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="$toggle('confirmingAuthorDeletion', false)" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3" wire:click="deleteGenre ({{ $confirmingGenreDeletion }})"
+                <x-danger-button class="ml-3" wire:click="deleteAuthor ({{ $confirmingAuthorDeletion }})"
                     wire:loading.attr="disabled">
                     {{ __('Remove') }}
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
-        <x-dialog-modal wire:model="confirmingGenreAdd">
+        <x-dialog-modal wire:model="confirmingAuthorAdd">
             <x-slot name="title">
-                {{ isset($this->genre->id) ? __('Edit genre') : __('Add genre') }}
+                {{ isset($this->author->id) ? __('Edit author') : __('Add author') }}
             </x-slot>
 
             <x-slot name="content">
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Name') }}" />
-                    <x-input id="genre.name" type="text" class="mt-1 block w-full" wire:model.defer="genre.name" />
-                    <x-input-error for="genre.name" class="mt-2" />
+                    <x-input id="author.name" type="text" class="mt-1 block w-full" wire:model.defer="author.name" />
+                    <x-input-error for="author.name" class="mt-2" />
                 </div>
             </x-slot>
             <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingGenreAdd', false)" wire:loading.attr="disabled">
+                <x-secondary-button wire:click="$toggle('confirmingAuthorAdd', false)" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3" wire:click="addGenre" wire:loading.attr="disabled">
+                <x-danger-button class="ml-3" wire:click="addAuthor" wire:loading.attr="disabled">
                     {{ __('Add') }}
                 </x-danger-button>
             </x-slot>

@@ -33,7 +33,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/genres', function () {
-        return view('genres');
+        return view('content.genres');
     })->name('genres');
 });
 
@@ -43,7 +43,17 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/books', function () {
-        return view('books');
+        return view('content.books');
     })->name('books');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/authors', function () {
+        return view('content.authors');
+    })->name('authors');
 });
 

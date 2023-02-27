@@ -17,13 +17,14 @@ return new class extends Migration
             $table->bigInteger('user_id')->index();
             $table->bigInteger('isbn')->unique();
             $table->string('title');
-            $table->string('author');
             $table->string('synopsis');
+            $table->bigInteger('author_id')->unsigned();
             $table->bigInteger('genre_id')->unsigned();
             $table->integer('pages')->unsigned();
             $table->boolean('finished');
             $table->timestamps();
             $table->foreign('genre_id')->references('id')->on('genres')->cascadeOnDelete();
+            $table->foreign('author_id')->references('id')->on('authors')->cascadeOnDelete();
         });
     }
 

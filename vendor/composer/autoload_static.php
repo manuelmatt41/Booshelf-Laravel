@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
+class ComposerStaticInit08177463f5e8f9770254733040b6581f
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -623,6 +623,7 @@ class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Livewire\\Author' => __DIR__ . '/../..' . '/app/Http/Livewire/Author.php',
         'App\\Http\\Livewire\\Books' => __DIR__ . '/../..' . '/app/Http/Livewire/Books.php',
         'App\\Http\\Livewire\\Genres' => __DIR__ . '/../..' . '/app/Http/Livewire/Genres.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -634,6 +635,7 @@ class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\Author' => __DIR__ . '/../..' . '/app/Models/Author.php',
         'App\\Models\\Book' => __DIR__ . '/../..' . '/app/Models/Book.php',
         'App\\Models\\Genre' => __DIR__ . '/../..' . '/app/Models/Genre.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -850,6 +852,7 @@ class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
         'DASPRiD\\Enum\\Exception\\SerializeNotSupportedException' => __DIR__ . '/..' . '/dasprid/enum/src/Exception/SerializeNotSupportedException.php',
         'DASPRiD\\Enum\\Exception\\UnserializeNotSupportedException' => __DIR__ . '/..' . '/dasprid/enum/src/Exception/UnserializeNotSupportedException.php',
         'DASPRiD\\Enum\\NullValue' => __DIR__ . '/..' . '/dasprid/enum/src/NullValue.php',
+        'Database\\Factories\\AuthorFactory' => __DIR__ . '/../..' . '/database/factories/AuthorFactory.php',
         'Database\\Factories\\BookFactory' => __DIR__ . '/../..' . '/database/factories/BookFactory.php',
         'Database\\Factories\\GenreFactory' => __DIR__ . '/../..' . '/database/factories/GenreFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
@@ -4551,7 +4554,6 @@ class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
         'PHPUnit\\Metadata\\BackupStaticProperties' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/BackupStaticProperties.php',
         'PHPUnit\\Metadata\\Before' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/Before.php',
         'PHPUnit\\Metadata\\BeforeClass' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/BeforeClass.php',
-        'PHPUnit\\Metadata\\CodeCoverageIgnore' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/CodeCoverageIgnore.php',
         'PHPUnit\\Metadata\\Covers' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/Covers.php',
         'PHPUnit\\Metadata\\CoversClass' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/CoversClass.php',
         'PHPUnit\\Metadata\\CoversDefaultClass' => __DIR__ . '/..' . '/phpunit/phpunit/src/Metadata/CoversDefaultClass.php',
@@ -6965,10 +6967,10 @@ class ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInita1ad93094e68fa59419eeaeaee1e26e5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit08177463f5e8f9770254733040b6581f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit08177463f5e8f9770254733040b6581f::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit08177463f5e8f9770254733040b6581f::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit08177463f5e8f9770254733040b6581f::$classMap;
 
         }, null, ClassLoader::class);
     }
