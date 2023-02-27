@@ -37,8 +37,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'test6@example.com',
         ]);
         
-        // \App\Models\Genre::factory(10)->create(['user_id' => rand(1, 3)]);
-        // \App\Models\Author::factory(10)->create(['user_id' => rand(1, 3)]);
-        // \App\Models\Book::factory(10)->create(['user_id' => rand(1, 3), 'genre_id' =>  rand(1, 10), 'author_id' =>  rand(1, 10)]);
     }
 }
