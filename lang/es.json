@@ -195,6 +195,7 @@
     "Synopsis": "Sinopsis",
     "Pages": "Páginas",
     "Finished": "Terminado",
+    "Unfinished": "No terminado",
     "Action": "Acción",
     "--SELECT GENRE--": "--SELECCIONA GENERO--",
     "--SELECT AUTHOR--": "--SELECCIONA AUTOR--",
@@ -208,5 +209,7 @@
     "Add book": "Añadir libro",
     "Edit author": "Editar autor",
     "Add author": "Añadir autor",
-    "Authors" : "Autores"
+    "Authors" : "Autores",
+    "Only finished?": "¿Solo acabados?"
+
 }

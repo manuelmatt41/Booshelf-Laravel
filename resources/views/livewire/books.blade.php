@@ -15,6 +15,10 @@
                     <input wire:model.debounce.500ms="q" type="search" placeholder="Search"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
+                <div class="mr-2">
+                    <input type="checkbox" class="mr-2 leading-tight" name=""
+                        wire:model="active" />{{ __('Only finished?') }}
+                </div>
             </div>
             <table class="table-auto w-full">
                 <thead>
@@ -55,11 +59,13 @@
                                 <x-sort-icon sortField="pages" :sortBy="$sortBy" :sortAsc="$sortAsc" />
                             </div>
                         </th>
-                        <th class="px-4 py-2">
-                            <div class="flex items-center">
-                                <button>{{ __('Finished') }}</button>
-                            </div>
-                        </th>
+                        @if (!$this->active)
+                            <th class="px-4 py-2">
+                                <div class="flex items-center">
+                                    <button>{{ __('Finished') }}</button>
+                                </div>
+                            </th>
+                        @endif
                         <th class="px-4 py-2">
                             <div class="flex items-center">{{ __('Action') }}</div>
                         </th>
@@ -71,12 +77,14 @@
                             <td class="rounded border px-4 py-2"> {{ $book->isbn }}</td>
                             <td class="rounded border px-4 py-2"> {{ $genres->find($book->genre_id)->name }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->title }}</td>
-                            <td class="rounded border px-4 py-2"> {{  $authors->find($book->author_id)->name }}</td>
+                            <td class="rounded border px-4 py-2"> {{ $authors->find($book->author_id)->name }}</td>
                             <td class="rounded border px-4 py-2">
                                 {{ \Illuminate\Support\Str::limit($book->synopsis, 10) }}</td>
                             <td class="rounded border px-4 py-2"> {{ $book->pages }}</td>
-                            <td class="rounded border px-4 py-2"> {{ $book->finished ? 'Finished' : 'Unfinished' }}
-                            </td>
+                            @if (!$this->active)
+                                <td class="rounded border px-4 py-2"> {{ $book->finished ? __('Finished') : __('Unfinished') }}
+                                </td>
+                            @endif  
                             <td class="rounded border px-4 py-2">
                                 <x-button wire:click="confirmBookEdit ({{ $book->id }})"
                                     class="bg-blue-500 hover:bg-blue-800">
@@ -124,14 +132,11 @@
                     <x-label for="name" value="{{ __('Isbn') }}" />
                     <x-input id="book.isbn" type="text" class="mt-1 block w-full" wire:model.defer="book.isbn" />
                     <x-input-error for="book.isbn" class="mt-2" />
-                    @if (session('error'))
-                        <div class="alert alert-danger text-red-500">{{ __('ISBN already exist') }}</div>
-                    @endif
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Genre id') }}" />
                     <select name="Genre id" wire:model.defer="book.genre_id">
-                        <option value="">{{__('--SELECT GENRE--')}}</option>
+                        <option value="">{{ __('--SELECT GENRE--') }}</option>
                         @foreach ($genres as $genre)
                             <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                         @endforeach
@@ -146,7 +151,7 @@
                 <div class="col-span-6 sm:col-span-4 mt-4">
                     <x-label for="name" value="{{ __('Author') }}" />
                     <select name="Author id" wire:model.defer="book.author_id">
-                        <option value="">{{__('--SELECT AUTHOR--')}}</option>
+                        <option value="">{{ __('--SELECT AUTHOR--') }}</option>
                         @foreach ($authors as $author)
                             <option value="{{ $author->id }}">{{ $author->name }}</option>
                         @endforeach

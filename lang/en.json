@@ -195,6 +195,7 @@
     "Synopsis": "Synopsis",
     "Pages": "Pages",
     "Finished": "Finished",
+    "Unfinished": "Unfinished",
     "Action": "Action",
     "--SELECT GENRE--": "--SELECT GENRE--",
     "--SELECT AUTHOR--": "--SELECT AUTHOR--",
@@ -209,5 +210,6 @@
     "Edit author": "Edit author",
     "Add author": "Add author",
     "Genre id": "Genre id",
-    "Authors" : "Authors"
+    "Authors" : "Authors",
+    "Only finished?": "Only finished?"
 }

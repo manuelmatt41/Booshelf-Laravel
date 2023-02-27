@@ -15,4 +15,8 @@ class Book extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeActive($query) {
+        return $query->where('finished', 1);
+    }
 }

@@ -12,6 +12,7 @@ class Books extends Component
 {
     use WithPagination;
 
+    public $active;
     public $q;
 
     public $sortBy = 'isbn';
@@ -23,6 +24,7 @@ class Books extends Component
     public $confirmingBookAdd = false;
 
     protected $queryString = [
+        'active' => ['except' => false],
         'q' => ['except' => ''],
         'sortBy' => ['except' => 'id'],
         'sortAsc' => ['except' => true]
@@ -36,11 +38,14 @@ class Books extends Component
         'book.synopsis' => 'required|string|min:50',
         'book.pages' => 'required|int|min:1',
         'book.finished' => 'boolean'
-        ];
+    ];
 
     public function render()
     {
         $books = Book::where('user_id', auth()->user()->id)
+            ->when($this->active, function ($query) {
+                return $query->active();
+            })
             ->when($this->q, function ($query) {
                 return $query->where(function ($query) {
                     $query->where('title', 'like', '%' . $this->q . '%');
@@ -49,14 +54,21 @@ class Books extends Component
             ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
         // $query = $genres->toSql();
         $books = $books->paginate(10);
-        $genres = Genre::all();
-        $authors = Author::all();
+        $genres = Genre::where('user_id', auth()->user()->id);
+        $genres = $genres->paginate();
+        $authors = Author::where('user_id', auth()->user()->id);
+        $authors = $authors->paginate();
 
         return view('livewire.books', [
             'books' => $books,
             'genres' => $genres,
             'authors' => $authors
         ]);
+    }
+
+    public function updatingActive()
+    {
+        $this->resetPage();
     }
 
     public function updatingQ()
@@ -96,19 +108,15 @@ class Books extends Component
         if (isset($this->book->id)) {
             $this->book->save();
         } else {
-            try {
-                auth()->user()->books()->create([
-                    'isbn' => $this->book['isbn'],
-                    'title' => $this->book['title'],
-                    'author_id' => $this->book['author_id'],
-                    'synopsis' => $this->book['synopsis'],
-                    'genre_id' => $this->book['genre_id'],
-                    'pages' => $this->book['pages'],
-                    'finished' => $this->book['finished']
-                ]);
-            } catch (\Throwable $th) {
-                return back()->withError($th->getMessage())->withInput();
-            }
+            auth()->user()->books()->create([
+                'isbn' => $this->book['isbn'],
+                'title' => $this->book['title'],
+                'author_id' => $this->book['author_id'],
+                'synopsis' => $this->book['synopsis'],
+                'genre_id' => $this->book['genre_id'],
+                'pages' => $this->book['pages'],
+                'finished' => $this->book['finished'] ?? 0
+            ]);
         }
         $this->confirmingBookAdd = false;
     }

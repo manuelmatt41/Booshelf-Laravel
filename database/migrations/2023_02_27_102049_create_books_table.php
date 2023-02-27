@@ -15,7 +15,7 @@ return new class extends Migration
             $table->engine ='InnoDB';
             $table->id();
             $table->bigInteger('user_id')->index();
-            $table->bigInteger('isbn')->unique();
+            $table->bigInteger('isbn');
             $table->string('title');
             $table->string('synopsis');
             $table->bigInteger('author_id')->unsigned();
