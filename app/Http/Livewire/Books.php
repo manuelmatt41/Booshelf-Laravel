@@ -54,10 +54,8 @@ class Books extends Component
             ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
         // $query = $genres->toSql();
         $books = $books->paginate(10);
-        $genres = Genre::where('user_id', auth()->user()->id);
-        $genres = $genres->paginate();
-        $authors = Author::where('user_id', auth()->user()->id);
-        $authors = $authors->paginate();
+        $genres = Genre::where('user_id', auth()->user()->id)->get();
+        $authors = Author::where('user_id', auth()->user()->id)->get();
 
         return view('livewire.books', [
             'books' => $books,
